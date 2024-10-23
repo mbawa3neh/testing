@@ -25,14 +25,17 @@ g = ggplot(data = dDate) +
 print(g)
 
 
-# =============== log plot:
+
 
 dDate = subset(data, subset = ((t >= "2020-06-01") & (t <= "2020-12-31")))
 
 g = ggplot(data = dDate) +
-  geom_line(mapping = aes(x = t, y = H), color = "red") +
-  scale_y_log10() +
+  geom_line(mapping = aes(x = t, y = H, color = "Hospitalised")) +
+  geom_line(mapping = aes(x = t, y = C, color = "Critical")) +
+  geom_line(mapping = aes(x = t, y = D, color = "Dead")) +
+  scale_y_sqrt() +
   scale_x_date(date_breaks = "1 month", date_minor_breaks = "1 week",
                date_labels = "%B") +
-  labs(title = "Hospital beds required (Sydney 2020)", x = "Date", y = "Beds")
+  labs(title = "Hospital beds required (Sydney 2020)", x = "Date", y = "Count",
+       color = "State")
 print(g)
